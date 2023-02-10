@@ -1,0 +1,47 @@
+﻿@model CreateCategoryModel;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid">
+    <div class="card mt-5">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Add new Category</h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+        <!-- row -->
+        <div class="row">
+            <div class="col-12">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control"></input>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UrlSlug" class="control-label"></label>
+                        <input asp-for="UrlSlug" class="form-control" />
+                        <span asp-validation-for="UrlSlug" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                         <textarea asp-for="Description" type="text" class="form-control" ></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-outline-dark">Trở về</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+     </div>
+</div>
+

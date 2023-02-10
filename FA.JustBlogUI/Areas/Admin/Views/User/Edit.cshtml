@@ -1,0 +1,60 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="card mt-5">
+    <div class="row">
+        <div class="card-body">
+            <div class="col-12">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <h4 class="mb-3">Roles</h4>
+
+                    <div class="my-3">
+
+                        @for (int i = 0; i < @Model.RolesList.Count(); i++)
+                        {
+                                <div class="form-check">
+                                @Html.CheckBoxFor(c => @Model.RolesList[i].Selected)
+                                @Html.HiddenFor(h => @Model.RolesList[i].Value)
+
+                                @Html.LabelFor(l => @Model.RolesList[i].Selected, @Model.RolesList[i].Text, new {@class="form-check-label"})
+                                @Html.HiddenFor(h => @Model.RolesList[i].Text)
+                                </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-outline-dark">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

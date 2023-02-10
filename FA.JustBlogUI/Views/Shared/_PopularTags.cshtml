@@ -1,0 +1,20 @@
+﻿@using FA.JustBlog.Service.TagService
+@inject ITagService tagService
+
+@{
+    var tag = tagService.GetAllTag().Data.ToList();
+}
+
+
+<div class="mx-auto">
+    <h4>Popular Tags</h4>
+    <hr />
+    <!-- Post preview-->
+    <div class="justify-content-start">
+
+    @foreach (var i in tag)
+    {
+        <a class="bg-dark text-white" style="text-decoration: underline; margin-top:60px; padding:2px" href="@Url.Action("GetPostByTag","Post", new{tag = @i.UrlSlug},null)">@i.Name</a>
+    }
+</div>
+</div>

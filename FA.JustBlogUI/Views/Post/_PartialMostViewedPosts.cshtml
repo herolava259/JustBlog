@@ -1,0 +1,27 @@
+﻿
+@using FA.JustBlog.Service.PostService
+@inject IPostService postService
+@{
+    var post = postService.GetMostViewedPost(2).Data;
+    //postService.Dispose();
+}
+
+<div class="mx-auto">
+    <h4>Most Viewed Posts</h4>
+    <hr />
+    <!-- Post preview-->
+    @foreach (var item in post)
+    {
+            <div class="post-preview">
+
+                <a href="/Post/@item.PostedOn.Year/@item.PostedOn.Month.ToString("00")/@item.UrlSlug">
+                    <h2 class="post-title">@item.Title</h2>
+                    <p class="post-meta">
+                        Posted
+                    @item.PostedOn
+                        with rate @item.Rate by @item.ViewCount view(s)
+                    </p>
+                </a>
+            </div>
+    }
+</div>

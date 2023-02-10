@@ -1,0 +1,29 @@
+﻿@using FA.JustBlog.Entity.Entity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+
+    <ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+            <li class="nav-item" style="text-align : right ; margin-left : 20px" >
+               Hello @UserManager.GetUserName(User)!
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Logout","Account")">Log out</a>
+            </li>
+
+    }
+    else
+    {
+            <li class="nav-item">
+                <a class="nav-link text-light" href="@Url.Action("Register" , "Account")">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="@Url.Action("Login" , "Account")">Login</a>
+            </li>
+    }
+</ul>

@@ -1,0 +1,78 @@
+﻿@model PostModel;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    PostModel post = ViewBag.Post;
+}
+
+<h1>Create Post</h1>
+
+<div class="container-fluid">
+    <div class="card mt-5">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Thêm bài viết mới</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- row -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control"></input>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ShortDescription" class="control-label"></label>
+                            <input asp-for="ShortDescription" class="form-control"></input>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PostContent" class="control-label"></label>
+                            <textarea asp-for="PostContent" type="text" class="form-control"></textarea>
+                            <span asp-validation-for="PostContent" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UrlSlug" class="control-label"></label>
+                            <input asp-for="UrlSlug" class="form-control" />
+                            <span asp-validation-for="UrlSlug" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PostedOn" class="control-label"></label>
+                            <input asp-for="PostedOn" class="form-control"></input>
+                            <span asp-validation-for="PostedOn" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Published" class="control-label"></label>
+                            <input asp-for="Published" class="form-control" />
+                            <span asp-validation-for="Published" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Tag(s)</label>
+
+                            @Html.ListBoxFor(pt => pt.SelectedTagModels, new MultiSelectList(ViewBag.Tags, "Id", "Name"), new { @class = "form-control select-multiple", multiple = "multiple" })
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                            <a asp-action="Index" class="btn btn-outline-dark">Trở về</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

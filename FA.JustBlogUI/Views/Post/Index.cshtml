@@ -1,0 +1,72 @@
+﻿@using FA.JustBlog.Model.Post
+
+@model IEnumerable<PostModelView>;
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Post Page";
+}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+
+        <div class="col-md-9 col-lg-9 col-xl-7 mx-auto">
+            <h2>All post!</h2>
+            <hr />
+            <!-- Post preview-->
+            @foreach (var item in Model)
+            {
+                    <div class="post-preview">
+                        <a href="@Url.Action("Details","Post", new{year= @item.PostedOn.Year, month= @item.PostedOn.Month, title= @item.UrlSlug},null)">
+                            <h2 class="post-title">@item.Title</h2>
+
+                        @if ((DateTime.Now.Date-@item.PostedOn.Date).TotalDays==0)
+                        {
+                            if ((DateTime.Now-@item.PostedOn).Hours==0 && (DateTime.Now-@item.PostedOn).Minutes==0)
+                            {
+                                                    <p class = "post-meta">Posted at @item.PostedOn.ToString("hh : mm tt") with @item.Rate by @item.ViewCount view(s)</p>
+                            }
+                            else if ((DateTime.Now-@item.PostedOn).Hours < 1)
+                            {
+                                                     <p class = "post-meta">Posted @((@DateTime.Now-@item.PostedOn).Minutes) minutes ago with @item.Rate by @item.ViewCount view(s)</p>
+                            }
+                            else
+                            {
+                                                     <p class = "post-meta">Posted @(@DateTime.Now-@item.PostedOn).Hours hours and @((@DateTime.Now-@item.PostedOn).Minutes) minutes  ago with @item.Rate by @item.ViewCount view(s)</p>
+                            }
+
+
+                        }
+                        else
+                        {
+                                            <p class = "post-meta">Posted @((@DateTime.Now.Date-@item.PostedOn.Date).TotalDays) days ago at @item.PostedOn.ToString("hh : mm tt")  with @item.Rate by @item.ViewCount view(s)</p>
+                        }
+
+                            <h3 class="post-subtitle">@item.ShortDescription</h3>
+                        </a>
+                         <div class="d-flex justify-content-start">
+                            <span class="mx-1 px-1 py-1">Category:</span>
+                             <a style="text-decoration: underline;" href="@Url.Action("GetPostByCategory","Post", new{category = @item.CategoryModel.Name},null)">@item.CategoryModel.Name</a>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <span class="mx-1 px-1 py-1">Tags:</span>
+                        @foreach (var tag in item.TagModel)
+                        {
+                                    <a class="bg-dark text-white mx-1 px-1 py-1" style="text-decoration: underline;" href="@Url.Action("GetPostByTag","Post", new{tag = @tag.UrlSlug},null)">@tag.Name</a>
+                        }
+                        </div>
+                    </div>
+            }
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        </div>
+        <div class="col-md-3 col-lg-3 mx-auto px-0">
+            <partial name="_PartialAboutCard" />
+            <partial name="_PartialLastestPosts" />
+            <hr />
+            <partial name="_PartialMostViewedPosts" />
+            <hr />
+            <partial name="_PopularTags" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@using FA.JustBlog.Service.PostService
+@inject IPostService postService
+@{
+    var latestpost = postService.GetLatestPost(1).Data;
+}
+<div class="mx-auto">
+    <h4>Latest Post</h4>
+    <hr />
+    <!-- Post preview-->
+    @foreach (var item in latestpost)
+    {
+            <div class="post-preview">
+
+                <a href="post.html">
+                    <h2 class="post-title">@item.Title</h2>
+                    <p class="post-meta">
+                        Posted
+                    @item.PostedOn
+                        with rate @item.Rate by @item.ViewCount view(s)
+                    </p>
+                </a>
+            </div>
+    }
+</div>

@@ -1,0 +1,67 @@
+﻿@model CommentModel;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Create Comment</h1>
+
+<div class="container-fluid">
+    <div class="card mt-5">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Thêm comment mới</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- row -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control"></input>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CommentHeader" class="control-label"></label>
+                            <input asp-for="CommentHeader" class="form-control" />
+                            <span asp-validation-for="CommentHeader" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CommentText" class="control-label"></label>
+                            <textarea asp-for="CommentText" type="text" class="form-control"></textarea>
+                            <span asp-validation-for="CommentText" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CommentTime" class="control-label"></label>
+                            <input asp-for="CommentTime" type="datetime-local" class="form-control"></input>
+                            <span asp-validation-for="CommentTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PostId" class="control-label"></label>
+                            <select asp-for="PostId" class="form-control" asp-items="ViewBag.Comment"></select>
+                            <span asp-validation-for="PostId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                            <a asp-action="Index" class="btn btn-outline-dark">Trở về</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
